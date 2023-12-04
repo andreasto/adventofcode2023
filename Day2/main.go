@@ -60,7 +60,6 @@ func ParseRow(row string) int {
 			} else if color == "green" {
 				isPossible = intGreen/number > 0
 			} else if color == "blue" {
-				log.Printf("BLUE: %d", intBlue/number)
 				isPossible = intBlue/number > 0
 			}
 
