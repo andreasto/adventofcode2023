@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("./Day3/input.txt")
+	file, err := os.Open("./Day3/testInput.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,11 +44,32 @@ func CheckRow(row string) bool {
 			// Skip because it's either a dot or a number
 			continue
 		}
-
 		hit = true
 		break
 	}
+
 	return hit
+}
+
+type Gear struct {
+	row         string
+	gearIndex   int
+	PartNumber1 int
+	PartNumber2 int
+}
+
+func CheckRowForGear(row string) *Gear {
+	crr := strings.Split(row, "")
+	for i, v := range crr {
+		if v == "*" {
+			return &Gear{
+				row:       row,
+				gearIndex: i,
+			}
+		}
+	}
+
+	return &Gear{}
 }
 
 func IsAdjacentToASymbol(rows []string) []int {
@@ -77,7 +98,6 @@ func IsAdjacentToASymbol(rows []string) []int {
 
 				// Check row before if exists
 				if i > 0 {
-
 					hit := CheckRow(rows[i-1][start:end])
 
 					if hit {
